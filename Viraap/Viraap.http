@@ -1,0 +1,6 @@
+@Viraap_HostAddress = http://localhost:5262
+
+GET {{Viraap_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
