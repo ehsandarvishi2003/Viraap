@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Viraap.Models;
+using Vira.Technical.Interview.Models.Entites;
 
 namespace Viraap.Data
 {
@@ -10,5 +10,6 @@ namespace Viraap.Data
         }
 
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }

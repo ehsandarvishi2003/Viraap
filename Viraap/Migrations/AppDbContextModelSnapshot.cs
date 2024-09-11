@@ -8,7 +8,7 @@ using Viraap.Data;
 
 #nullable disable
 
-namespace Viraap.Migrations
+namespace Vira.Technical.Interview.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -22,17 +22,16 @@ namespace Viraap.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Viraap.Models.Customer", b =>
+            modelBuilder.Entity("Vira.Technical.Interview.Models.Entites.Customer", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Family")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<short>("Age")
+                        .HasColumnType("smallint");
 
-                    b.Property<string>("FullDes")
+                    b.Property<string>("Family")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -40,13 +39,31 @@ namespace Viraap.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Status")
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("Vira.Technical.Interview.Models.Entites.Employee", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Family")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Customers");
+                    b.HasKey("Id");
+
+                    b.ToTable("Employees");
                 });
 #pragma warning restore 612, 618
         }

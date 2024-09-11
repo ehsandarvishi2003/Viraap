@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Vira.Technical.Interview.Models.Classes;
+using Vira.Technical.Interview.Models.Entites;
+using Viraap.Data;
 
 namespace Viraap.Controllers
 {
@@ -8,6 +12,52 @@ namespace Viraap.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        //We are going to add the Endpoint of operations
+        #region DbContext
+
+        //Because we inject the DbContext in the program.cs file, so we cane
+        //accessed eny ware inside the application even in the controller.
+
+        //Constructor injection : 
+        private readonly AppDbContext _dbContext;
+        public CustomersController(AppDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        #endregion
+
+        //We are going to add the Endpoint of operations:
+
+        #region Post
+
+        [HttpPost]
+        public async Task<ActionResult<RegistrationResponse>> RegisterCustomer(Customer customer)
+        {
+            _dbContext.Customers.AddAsync(customer);
+            await _dbContext.SaveChangesAsync();
+
+            var response = new RegistrationResponse
+            {
+                Status = "OK",
+                FullDes = $"{customer.Name} {customer.Family} با سن {customer.Age} در پایگاه داده ثبت شد."
+            };
+
+            return Ok(response);
+        }
+
+        #endregion
+
+        #region Get
+
+        [HttpGet]
+        public ActionResult<EmploymentResponse> GetEmploymentStatus([FromQuery] Employee employee)
+        {
+            var response = new EmploymentResponse();//Because the answers were the same, I wrote in the constructor
+
+            return Ok(response);
+        }
+
+        #endregion
+
     }
 }
