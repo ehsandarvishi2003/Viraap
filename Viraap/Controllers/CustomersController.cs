@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Vira.Technical.Interview.Models.Classes;
@@ -28,10 +29,10 @@ namespace Viraap.Controllers
 
         //We are going to add the Endpoint of operations:
 
-        #region Post
+        #region Post 
 
         [HttpPost]
-        public async Task<ActionResult<RegistrationResponse>> RegisterCustomer(Customer customer)
+        public async Task<ActionResult<RegistrationResponse>> RegisterCustomer([FromBody] Customer customer)
         {
             _dbContext.Customers.AddAsync(customer);
             await _dbContext.SaveChangesAsync();
@@ -45,19 +46,9 @@ namespace Viraap.Controllers
             return Ok(response);
         }
 
-        #endregion
+        #endregion  
 
-        #region Get
-
-        [HttpGet]
-        public ActionResult<EmploymentResponse> GetEmploymentStatus([FromQuery] Employee employee)
-        {
-            var response = new EmploymentResponse();//Because the answers were the same, I wrote in the constructor
-
-            return Ok(response);
-        }
-
-        #endregion
+        
 
     }
 }

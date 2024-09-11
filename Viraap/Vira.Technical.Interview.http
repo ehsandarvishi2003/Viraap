@@ -1,0 +1,17 @@
+﻿@Vira.Technical.Interview_HostAddress = https://localhost:7256
+
+
+
+
+POST {{Vira.Technical.Interview_HostAddress}}/api/customers?Name=علی&Family=مرادپور&Age=70
+Content-Type: application/json
+
+{
+  //Customer
+}
+
+###
+
+GET {{Vira.Technical.Interview_HostAddress}}/api/employees?Name=علی&Family=علیزاده&Code=123456
+
+###
